@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:TwitchChatListen"
         mc:Ignorable="d"
-        Title="TwitchChatListen" Height="450" Width="600" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="TwitchChatListen" Height="450" Width="600" Closing="Window_Closing" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
