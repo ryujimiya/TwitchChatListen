@@ -1,0 +1,57 @@
+﻿<Window x:Class="TwitchChatListen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:TwitchChatListen"
+        mc:Ignorable="d"
+        Title="TwitchChatListen" Height="450" Width="600" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
+    <StackPanel x:Name="StackPanel1" VerticalAlignment="Top" Margin="0,0,2,0" Height="418">
+        <WrapPanel x:Name="WrapPanel1" Height="65" VerticalAlignment="Top" Background="#FF591F6A">
+            <TextBox x:Name="ChannelNameTextBox" Height="62" TextWrapping="Wrap" Width="305" FontSize="32" KeyUp="ChannelNameTextBox_KeyUp"/>
+            <Button x:Name="UpdateBtn" Width="75" Click="UpdateBtn_Click">
+                <Image Source="pack://siteoforigin:,,,/Resources/update.png"  Stretch="UniformToFill"/>
+                <!--
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Resources/update.png" />
+                </Button.Background>
+                -->
+            </Button>
+            <Button x:Name="TwitchWatchBtn" Width="75" Height="65" Click="TwitchBtn_Click">
+                <Image Source="pack://siteoforigin:,,,/Resources/Twitch.png"  Stretch="UniformToFill" />
+                <!--
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Resources/Twitch.png" />
+                </Button.Background>
+                -->
+            </Button>
+            <Button x:Name="SettingsBtn" Width="75" Height="58" Click="SettingsBtn_Click">
+                <Image Source="pack://siteoforigin:,,,/Resources/settings.png"  Stretch="UniformToFill" Height="58" />
+                <!--
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Resources/settings.png" />
+                </Button.Background>
+                -->
+            </Button>
+        </WrapPanel>
+        <WrapPanel x:Name="WrapPanel2" Height="57" VerticalAlignment="Top" Background="#FF591F6A">
+            <TextBox x:Name="CommentTextBox" Height="58" TextWrapping="Wrap" Width="505" FontSize="32" KeyUp="CommentTextBox_KeyUp"/>
+            <Button x:Name="SendBtn" Width="75" Click="SendBtn_Click">
+                <Image Source="pack://siteoforigin:,,,/Resources/send.png"  Stretch="UniformToFill" />
+                <!--
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Resources/send.png" />
+                </Button.Background>
+                -->
+            </Button>
+        </WrapPanel>
+        <DataGrid x:Name="DataGrid" IsReadOnly="True" ItemsSource="{Binding UiCommentDataCollection}" CanUserSortColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderThickness="1" RenderTransformOrigin="0.503,0.468" FontSize="20" Height="295">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{x:Null}" Header="スクリーンネーム"/>
+                <DataGridTextColumn Binding="{Binding CommentStr}" ClipboardContentBinding="{x:Null}" Header="コメント"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>
