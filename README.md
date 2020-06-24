@@ -4,7 +4,8 @@ Twitchのコメント読み上げ（棒読みちゃん連携）アプリです�
 コメントを保存しているのでアプリを再起動してもコメントが消えません。  
 (TwitchのWebコメント欄はページを更新するとコメントが消えてしまう、これを何とかしたくて作ったアプリです)  
   
-**Latest Release**  
+**Latest Release(2020-06-25)**
+  
 version1.0.0.0  
 　[インストール](https://github.com/ryujimiya/TwitchChatListen/blob/master/publish/)  
   

@@ -70,6 +70,15 @@ namespace TwitchChatListen
         private TwitchChatClient TwitchChatClient;
 
         /// <summary>
+        /// IME変換している?
+        /// </summary>
+        private bool IsImeOnConv = false;
+        /// <summary>
+        /// ENTERキーが入力された?
+        /// </summary>
+        private bool IsEnterKeyBuffer = false;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
@@ -79,6 +88,9 @@ namespace TwitchChatListen
             // GUI初期処理
             TitleBase = this.Title + " " + MyUtil.GetFileVersion();
             this.Title = TitleBase;
+
+            TextCompositionManager.AddPreviewTextInputHandler(this, OnPreviewTextInput);
+            TextCompositionManager.AddPreviewTextInputUpdateHandler(this, OnPreviewTextInputUpdate);
         }
 
         /// <summary>
@@ -282,12 +294,40 @@ namespace TwitchChatListen
         /// <param name="e"></param>
         private void CommentTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (!IsImeOnConv && e.Key == Key.Enter && IsEnterKeyBuffer)
+            {
+                IsEnterKeyBuffer = false;
+            }
+            else if (IsImeOnConv == false && e.Key == Key.Enter && !IsEnterKeyBuffer)
             {
                 SendComment();
             }
         }
 
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (IsImeOnConv)
+            {
+                IsEnterKeyBuffer = true;
+            }
+            else
+            {
+                IsEnterKeyBuffer = false;
+            }
+            IsImeOnConv = false;
+        }
+
+        private void OnPreviewTextInputUpdate(object sender, TextCompositionEventArgs e)
+        {
+            if (e.TextComposition.CompositionText.Length == 0)
+            {
+                IsImeOnConv = false;
+            }
+            else
+            {
+                IsImeOnConv = true;
+            }
+        }
 
         /// <summary>
         /// トピックを設定する
